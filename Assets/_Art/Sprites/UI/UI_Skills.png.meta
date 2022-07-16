@@ -115,10 +115,10 @@ TextureImporter:
       name: UI_Skills_0
       rect:
         serializedVersion: 2
-        x: 427
-        y: 437
-        width: 4
-        height: 4
+        x: 76
+        y: 183
+        width: 92
+        height: 92
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,10 +136,10 @@ TextureImporter:
       name: UI_Skills_1
       rect:
         serializedVersion: 2
-        x: 84
-        y: 186
-        width: 79
-        height: 83
+        x: 202
+        y: 183
+        width: 92
+        height: 92
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,10 +157,10 @@ TextureImporter:
       name: UI_Skills_2
       rect:
         serializedVersion: 2
-        x: 191
-        y: 186
-        width: 79
-        height: 83
+        x: 329
+        y: 183
+        width: 92
+        height: 92
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,10 +178,10 @@ TextureImporter:
       name: UI_Skills_3
       rect:
         serializedVersion: 2
-        x: 291
-        y: 186
-        width: 79
-        height: 83
+        x: 76
+        y: 62
+        width: 92
+        height: 92
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,10 +199,10 @@ TextureImporter:
       name: UI_Skills_4
       rect:
         serializedVersion: 2
-        x: 79
-        y: 73
-        width: 79
-        height: 83
+        x: 202
+        y: 61
+        width: 92
+        height: 92
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -220,10 +220,10 @@ TextureImporter:
       name: UI_Skills_5
       rect:
         serializedVersion: 2
-        x: 186
-        y: 71
-        width: 81
-        height: 85
+        x: 329
+        y: 61
+        width: 92
+        height: 92
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -233,27 +233,6 @@ TextureImporter:
       bones: []
       spriteID: 7dd05ecdf4f648740800000000000000
       internalID: 5153366262417788375
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: UI_Skills_6
-      rect:
-        serializedVersion: 2
-        x: 291
-        y: 71
-        width: 79
-        height: 83
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 84e2121ffd6b5f430800000000000000
-      internalID: 3816157332205809224
       vertices: []
       indices: 
       edges: []
