@@ -26,7 +26,7 @@ public class Skill : MonoBehaviour
     }
     
     
-
+    
     public SkillType skillType;
     public SkillState skillState;
     public float speedMultiplier = 1.2f;
@@ -42,12 +42,13 @@ public class Skill : MonoBehaviour
 
 
     public bool isActive { get { return skillState == SkillState.Active; } }
-
+    
     private SpriteRenderer spriteRenderer;
     private Text skillDetailsText;
 
     private void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
+
         skillDetailsText = GameObject.Find("SkillDetails").GetComponent<Text>();
         UpdateColor();
 

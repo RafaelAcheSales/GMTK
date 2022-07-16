@@ -914,6 +914,7 @@ namespace Gamekit2D
 
         public bool CheckForMeleeAttackInput()
         {
+            Debug.Log(PlayerInput.Instance.MeleeAttack.Down);
             return PlayerInput.Instance.MeleeAttack.Down;
         }
 
