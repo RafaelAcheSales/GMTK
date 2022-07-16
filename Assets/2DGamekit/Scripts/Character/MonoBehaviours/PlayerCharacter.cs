@@ -44,7 +44,7 @@ namespace Gamekit2D
         public float normalGravity = 32f;
         public float dashSpeed = 5f;
         public int numberOfJumps = 1;
-        public int maxNumberOfJumps = 2;
+        public int maxNumberOfJumps = 3;
         public float dashAcceleration = 2f;
         public float dashReloadTime = 1f;
         public float maxSpeed = 10f;

@@ -12,7 +12,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Ground
   - 
   - Level
   - Enemy
@@ -26,8 +26,8 @@ TagManager:
   - EnemyWeapon
   - BossWeakPoint
   - Bullet
-  - 
-  - 
+  - Overlay
+  - IgnoreRender
   - 
   - 
   - 
