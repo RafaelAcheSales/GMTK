@@ -21,7 +21,9 @@ public class SkillsManager : Singleton<SkillsManager>
     //returns if any skill of type is active
     public bool IsSkillActive(Skill.SkillType skillType) {
         return skills.Any(tuple => tuple.Item1 == skillType && tuple.Item2.skillState == Skill.SkillState.Active);
-    }        
+    }
+
+    
     
     
 
