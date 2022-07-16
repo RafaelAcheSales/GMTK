@@ -44,12 +44,12 @@ public class Skill : MonoBehaviour
     public bool isActive { get { return skillState == SkillState.Active; } }
     
     private SpriteRenderer spriteRenderer;
-    private Text skillDetailsText;
+    // private Text skillDetailsText;
 
     private void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        skillDetailsText = GameObject.Find("SkillDetails").GetComponent<Text>();
+        // skillDetailsText = GameObject.Find("SkillDetails").GetComponent<Text>();
         UpdateColor();
 
     }
@@ -124,13 +124,13 @@ public class Skill : MonoBehaviour
     }
 
     private void OnMouseEnter() {
-        skillDetailsText.text = skillDetails;
-        skillDetailsText.enabled = true;
+        // skillDetailsText.text = skillDetails;
+        // skillDetailsText.enabled = true;
     }
 
     private void OnMouseExit() {
-        skillDetailsText.enabled = false;
-        skillDetailsText.text = "";
+        // skillDetailsText.enabled = false;
+        // skillDetailsText.text = "";
     }
 
 
