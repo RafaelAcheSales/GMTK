@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3361086027657588510}
   - component: {fileID: 8737123448957871242}
   - component: {fileID: 4916883368928409369}
-  - component: {fileID: -8372739201680304936}
+  - component: {fileID: 383254732}
   m_Layer: 6
   m_Name: Tiles
   m_TagString: Untagged
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5860127533141028400}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.3107755, y: 0.5786288, z: -4.132145}
-  m_LocalScale: {x: 126.66, y: 126.66, z: 126.66}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -60,7 +60,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 624c40ef0ed0e5d49869af6904e69d29, type: 2}
+  - {fileID: 2100000, guid: 8adc08fbb90636442b9fa98b552ab702, type: 2}
+  - {fileID: 2100000, guid: 9b0381d901a9f6243b374c9853545d9b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,7 +83,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!61 &-8372739201680304936
+--- !u!61 &383254732
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,7 +96,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.0020718384}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -106,5 +107,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.02140701, y: 0.015856322}
+  m_Size: {x: 2.140701, y: 2.140701}
   m_EdgeRadius: 0

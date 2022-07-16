@@ -11,11 +11,9 @@ public class Skill : MonoBehaviour
     public enum SkillType
     {
         MoveSpeed,
-        DoubleJump,
+        AditionalJump,
         Dash,
-        Glide,
         Shield,
-        IncreaseShield,
         WallGrab,
 
     }
@@ -31,11 +29,7 @@ public class Skill : MonoBehaviour
     public SkillState skillState;
     public float speedMultiplier = 1.2f;
     public float shieldIncreaseTime = 1f;
-    Dictionary<SkillType, Func<float, bool>> skillActivationCallbacks = new Dictionary<SkillType, Func<float, bool>>() {
-        {SkillType.MoveSpeed, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().MultiplyMaxSpeed(a); return true; }},
-        {SkillType.IncreaseShield, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().AddToShieldEffectTime(a); return true; }},
 
-    };
     public string skillDetails;
     
 
@@ -92,35 +86,6 @@ public class Skill : MonoBehaviour
         UpdateColor();
         Debug.Log("Unlocked " + skillType);
 
-    }
-
-    public void Activate()
-    {
-        skillState = SkillState.Active;
-        UpdateColor();
-        SkillsManager.Instance.audioSource.Play();
-        foreach (Skill skill in GetDownwardSkills())
-            if (skill.skillState == SkillState.Locked)
-                skill.Unlock();
-        Debug.Log("Activated " + skillType);
-        if (!skillActivationCallbacks.ContainsKey(skillType)) return;
-        switch (skillType)
-        {
-            case SkillType.MoveSpeed:
-                skillActivationCallbacks[skillType](speedMultiplier);
-                break;
-            case SkillType.IncreaseShield:
-                skillActivationCallbacks[skillType](shieldIncreaseTime);
-                break;
-        }
-        
-    }
-    private void OnMouseDown() {
-        Debug.Log("Clicked " + skillType + " " + skillState + SkillsManager.Instance.skillPoints);
-        if (SkillsManager.Instance.skillPoints <= 0) return;
-        if (skillState != SkillState.Unlocked) return;
-        SkillsManager.Instance.skillPoints--;
-        Activate();
     }
 
     private void OnMouseEnter() {
