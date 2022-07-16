@@ -12,6 +12,8 @@ namespace Gamekit2D
         [Tooltip("The distance down to check for ground.")]
         public float groundedRaycastDistance = 0.1f;
 
+
+
         Rigidbody2D m_Rigidbody2D;
         CapsuleCollider2D m_Capsule;
         Vector2 m_PreviousPosition;
@@ -30,6 +32,8 @@ namespace Gamekit2D
         public Collider2D[] GroundColliders { get { return m_GroundColliders; } }
         public ContactFilter2D ContactFilter { get { return m_ContactFilter; } }
 
+        private bool wallGrabbing = false;
+
 
         void Awake()
         {
@@ -45,18 +49,45 @@ namespace Gamekit2D
 
             Physics2D.queriesStartInColliders = false;
         }
+        public Collider2D GetCollider()
+        {
+            return m_Capsule;
+        }
+        public void StartGrabbingWall()
+        {
+            Debug.Log("Start Grabbing Wall");
+            wallGrabbing = true;
+        }
+        public void StopGrabbingWall()
+        {
+            Debug.Log("Stop Grabbing Wall");
+            wallGrabbing = false;
+        }
+        public bool IsGrabbingWall()
+        {
+            return wallGrabbing;
+        }
 
         void FixedUpdate()
         {
-            m_PreviousPosition = m_Rigidbody2D.position;
-            m_CurrentPosition = m_PreviousPosition + m_NextMovement;
-            Velocity = (m_CurrentPosition - m_PreviousPosition) / Time.deltaTime;
+            if (wallGrabbing)
+            {
+                m_Rigidbody2D.velocity = Vector2.zero;
+                m_Rigidbody2D.angularVelocity = 0;
+                m_NextMovement = Vector2.zero;
+            } 
+            else
+            {
+                m_PreviousPosition = m_Rigidbody2D.position;
+                m_CurrentPosition = m_PreviousPosition + m_NextMovement;
+                Velocity = (m_CurrentPosition - m_PreviousPosition) / Time.deltaTime;
 
-            m_Rigidbody2D.MovePosition(m_CurrentPosition);
-            m_NextMovement = Vector2.zero;
+                m_Rigidbody2D.MovePosition(m_CurrentPosition);
+                m_NextMovement = Vector2.zero;
 
-            CheckCapsuleEndCollisions();
-            CheckCapsuleEndCollisions(false);
+                CheckCapsuleEndCollisions();
+                CheckCapsuleEndCollisions(false);
+            }
         }
 
         /// <summary>
@@ -66,6 +97,15 @@ namespace Gamekit2D
         public void Move(Vector2 movement)
         {
             m_NextMovement += movement;
+        }
+
+        /// <summary>
+        /// This moves a rigidbody with dash force
+        /// </summary>
+        /// <param name="movement">The amount moved in global coordinates relative to the rigidbody2D's position.</param>
+        public void Dash(Vector2 movement)
+        {
+            m_Rigidbody2D.MovePosition(m_CurrentPosition + movement);
         }
 
         /// <summary>
@@ -79,6 +119,7 @@ namespace Gamekit2D
             m_CurrentPosition = position;
             m_Rigidbody2D.MovePosition(position);
         }
+
 
         /// <summary>
         /// This updates the state of IsGrounded.  It is called automatically in FixedUpdate but can be called more frequently if higher accurracy is required.

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Security.Principal;
 using UnityEngine;
@@ -11,6 +12,9 @@ namespace Gamekit2D
     public class PlayerCharacter : MonoBehaviour
     {
         static protected PlayerCharacter s_PlayerInstance;
+
+        
+
         static public PlayerCharacter PlayerInstance { get { return s_PlayerInstance; } }
 
         public InventoryController inventoryController
@@ -26,6 +30,23 @@ namespace Gamekit2D
         public BulletPool bulletPool;
         public Transform cameraFollowTarget;
 
+
+        public Color shieldColor;
+        public float timePenaltyForDying = 20f;
+        public float shieldEffectTime = 1f;
+        public float shieldReload = 10f;
+        public bool isGliding = false;
+        public float glideSpeed = 3f;
+        public int numberOfRaycasts = 2;
+        public float raycastOffset = 0.2f;
+        public float raycastSize = 0.5f;
+        public float wallJumpMultiplier = 1.5f;
+        public float normalGravity = 32f;
+        public float dashSpeed = 5f;
+        public int numberOfJumps = 1;
+        public int maxNumberOfJumps = 2;
+        public float dashAcceleration = 2f;
+        public float dashReloadTime = 1f;
         public float maxSpeed = 10f;
         public float groundAcceleration = 100f;
         public float groundDeceleration = 100f;
@@ -49,6 +70,12 @@ namespace Gamekit2D
         public RandomAudioPlayer hurtAudioPlayer;
         public RandomAudioPlayer meleeAttackAudioPlayer;
         public RandomAudioPlayer rangedAttackAudioPlayer;
+        public RandomAudioPlayer shieldAudioPlayer;
+        public RandomAudioPlayer respawnAudioPlayer;
+        public RandomAudioPlayer jumpAudioPlayer;
+        public RandomAudioPlayer dashAudioPlayer;
+        public RandomAudioPlayer glidingAudioPlayer;
+
 
         public float shotsPerSecond = 1f;
         public float bulletSpeed = 5f;
@@ -64,6 +91,7 @@ namespace Gamekit2D
 
         public bool spriteOriginallyFacesLeft;
 
+        protected Color[] colors = { Color.red, Color.green, Color.blue, Color.yellow };
         protected CharacterController2D m_CharacterController2D;
         protected Animator m_Animator;
         protected CapsuleCollider2D m_Capsule;
@@ -81,6 +109,7 @@ namespace Gamekit2D
         protected float m_NextShotTime;
         protected bool m_IsFiring;
         protected float m_ShotTimer;
+        protected bool m_canDash = true;
         protected float m_HoldingGunTimeRemaining;
         protected TileBase m_CurrentSurface;
         protected float m_CamFollowHorizontalSpeed;
@@ -91,12 +120,18 @@ namespace Gamekit2D
         protected Checkpoint m_LastCheckpoint = null;
         protected Vector2 m_StartingPosition = Vector2.zero;
         protected bool m_StartingFacingLeft = false;
+        protected bool m_CanGrabWall = true;
+        protected bool m_isWallOnLeft = false;
 
         protected bool m_InPause = false;
 
         protected readonly int m_HashHorizontalSpeedPara = Animator.StringToHash("HorizontalSpeed");
         protected readonly int m_HashVerticalSpeedPara = Animator.StringToHash("VerticalSpeed");
         protected readonly int m_HashGroundedPara = Animator.StringToHash("Grounded");
+        protected readonly int m_HashSlidingPara= Animator.StringToHash("Sliding");
+        
+        protected readonly int m_HashIsGlidingPara = Animator.StringToHash("Gliding");
+        protected readonly int m_HashDashPara = Animator.StringToHash("Dash");
         protected readonly int m_HashCrouchingPara = Animator.StringToHash("Crouching");
         protected readonly int m_HashPushingPara = Animator.StringToHash("Pushing");
         protected readonly int m_HashTimeoutPara = Animator.StringToHash("Timeout");
@@ -113,6 +148,9 @@ namespace Gamekit2D
 
         //used in non alloc version of physic function
         protected ContactPoint2D[] m_ContactsBuffer = new ContactPoint2D[16];
+        protected Vector3 hitUpPoint, hitDownPoint;
+        protected Color m_currentColor;
+        protected bool m_CanUseShield = true;
 
         // MonoBehaviour Messages - called by Unity internally.
         void Awake()
@@ -130,10 +168,12 @@ namespace Gamekit2D
 
         void Start()
         {
+            m_currentColor = spriteRenderer.color;
             hurtJumpAngle = Mathf.Clamp(hurtJumpAngle, k_MinHurtJumpAngle, k_MaxHurtJumpAngle);
             m_TanHurtJumpAngle = Mathf.Tan(Mathf.Deg2Rad * hurtJumpAngle);
             m_FlickeringWait = new WaitForSeconds(flickeringDuration);
-
+            gravity = normalGravity;
+            numberOfJumps = maxNumberOfJumps;
             meleeDamager.DisableDamage();
 
             m_ShotSpawnGap = 1f / shotsPerSecond;
@@ -165,6 +205,7 @@ namespace Gamekit2D
             {
                 m_CurrentPushables.Add(pushable);
             }
+            
         }
 
         void OnTriggerExit2D(Collider2D other)
@@ -176,33 +217,99 @@ namespace Gamekit2D
                     m_CurrentPushables.Remove(pushable);
             }
         }
+        //Check if collided with wall while airborne
+        private void OnCollisionEnter2D(Collision2D other) {
+            if (!SkillsManager.Instance.IsSkillActive(Skill.SkillType.WallGrab)) return;
+            float rightAngle = Vector2.Angle(other.GetContact(0).normal, Vector2.right);
+            float leftAngle = Vector2.Angle(other.GetContact(0).normal, Vector2.left);
+            bool isWallOnRight = rightAngle > -45f && rightAngle < 45f;
+            bool isWallOnLeft = leftAngle > -45f && leftAngle < 45f;
+            bool isWall = isWallOnRight || isWallOnLeft;
+            if (other.gameObject.layer == LayerMask.NameToLayer("Platform") &&
+             !IsGrounded() && m_CanGrabWall && isWall) {
+                CastRays(isWallOnRight);
+                m_CharacterController2D.StartGrabbingWall();
+                AddJump();
+                m_isWallOnLeft = other.GetContact(0).point.x < transform.position.x;
+                StartCoroutine(WallGrabCoroutine());
+                StopGliding();
+            }
+        }
+        
+        private void OnDrawGizmos() {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(hitUpPoint, 0.4f);
+        }
+        public void CastRays(bool isWallOnRight) {
+            RaycastHit2D hit;
+            Vector2 direction = isWallOnRight ? Vector2.right : Vector2.left;
+            for (int i = 0; i < numberOfRaycasts; i++) {                
+                float yOffset = (i*raycastOffset);
+                Vector3 origin = new Vector3(transform.position.x , transform.position.y + yOffset , 0f);
+                hit = Physics2D.Raycast(origin, direction, raycastSize, LayerMask.GetMask("Platform"));
+                if (hit.collider == null) continue;
+                Debug.DrawLine(origin, origin + new Vector3(direction.x, direction.y, 0f) * raycastSize, colors[i], 1f);
+                
+                hitUpPoint = new Vector3(hit.point.x, hit.point.y, -1f);
+            }
+            
+           
+            
+        }
+        IEnumerator WallGrabCoroutine() {
+            m_CanGrabWall = false;
+            yield return new WaitForSeconds(0.5f);
+            m_CanGrabWall = true;
+        }
+        public bool IsGrabbingWall() {
+            return m_CharacterController2D.IsGrabbingWall();
+        }
+        public float StopGrabbingWall() {
+            Debug.Log("Stop grabbing wall");
+            m_CharacterController2D.StopGrabbingWall();
+            return PlayerInput.Instance.Horizontal.Value;
+        }
+
+        public void AddToShieldEffectTime(float time) {
+            shieldEffectTime += time;
+        }
+        public void UseShield() {
+            if (!SkillsManager.Instance.IsSkillActive(Skill.SkillType.Shield)) return;
+            // Debug.Log(PlayerInput.Instance.Shield.Held +" " + m_CanUseShield + " " + m_CanUseShield);
+            if (PlayerInput.Instance.Shield.Down && m_CanUseShield) {
+                Debug.Log("Use shield");
+                m_CanUseShield = false;
+                shieldAudioPlayer.PlayRandomSound();
+                StartCoroutine(ShieldCoroutine());
+                StartCoroutine(ShieldReload());
+                
+            }
+
+        }
+        IEnumerator ShieldCoroutine() {
+            damageable.EnableInvulnerability();
+            spriteRenderer.color = shieldColor;
+            yield return new WaitForSeconds(shieldEffectTime);
+            damageable.DisableInvulnerability();
+            spriteRenderer.color = m_currentColor;
+
+        }
+        IEnumerator ShieldReload() {
+            yield return new WaitForSeconds(shieldReload);
+            m_CanUseShield = true;
+        }
 
         void Update()
         {
-            if (PlayerInput.Instance.Pause.Down)
-            {
-                if (!m_InPause)
-                {
-                    if (ScreenFader.IsFading)
-                        return;
-
-                    PlayerInput.Instance.ReleaseControl(false);
-                    PlayerInput.Instance.Pause.GainControl();
-                    m_InPause = true;
-                    Time.timeScale = 0;
-                    UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("UIMenus", UnityEngine.SceneManagement.LoadSceneMode.Additive);
-                }
-                else
-                {
-                    Unpause();
-                }
-            }
+            
         }
 
         void FixedUpdate()
         { 
-            m_CharacterController2D.Move(m_MoveVector * Time.deltaTime);
+            UseShield();
+            if (!Dash())
             m_Animator.SetFloat(m_HashHorizontalSpeedPara, m_MoveVector.x);
+            m_CharacterController2D.Move(m_MoveVector * Time.deltaTime);
             m_Animator.SetFloat(m_HashVerticalSpeedPara, m_MoveVector.y);
             UpdateBulletSpawnPointPositions();
             UpdateCameraFollowTargetPosition();
@@ -332,6 +439,46 @@ namespace Gamekit2D
 
             rangedAttackAudioPlayer.PlayRandomSound();
         }
+        // public void StartSlide() {
+        //     m_Animator.SetBool(m_HashSlidingPara, true);
+        // }
+
+        public bool CanDash() {
+            return m_canDash;
+        }
+
+        public bool Dash() {
+            if(!SkillsManager.Instance.IsSkillActive(Skill.SkillType.Dash)) return false;
+            if (PlayerInput.Instance.Dash.Down && m_canDash) {
+                m_MoveVector.x = m_MoveVector.x * dashSpeed;
+                m_Animator.SetTrigger(m_HashDashPara);
+                dashAudioPlayer.PlayRandomSound();
+                m_CharacterController2D.Dash(new Vector2(PlayerInput.Instance.Horizontal.Value * dashSpeed, 0f));
+                StartCoroutine(DashCoroutine());
+                return true;
+            }
+            return false;
+        }
+
+        IEnumerator DashCoroutine() {
+            m_canDash = false;
+            yield return new WaitForSeconds(dashReloadTime);
+            m_canDash = true;
+        }
+        public void StartGliding() {
+            Debug.Log("Start Gliding");
+            isGliding = true;
+            m_Animator.SetBool(m_HashIsGlidingPara, true);
+            glidingAudioPlayer.PlayRandomSound();
+            gravity = glideSpeed;
+        }
+
+        public void StopGliding() {
+            isGliding = false;
+            m_Animator.SetBool(m_HashIsGlidingPara, false);
+            glidingAudioPlayer.GetComponent<AudioSource>().Stop();
+            gravity = normalGravity;
+        }
 
         // Public functions - called mostly by StateMachineBehaviours in the character's Animator Controller but also by Events.
         public void SetMoveVector(Vector2 newMoveVector)
@@ -346,6 +493,9 @@ namespace Gamekit2D
 
         public void SetVerticalMovement(float newVerticalMovement)
         {
+            if (newVerticalMovement == jumpSpeed){
+                JumpSound();
+            }
             m_MoveVector.y = newVerticalMovement;
         }
 
@@ -372,6 +522,10 @@ namespace Gamekit2D
             {
                 m_MoveVector.y = -gravity * Time.deltaTime * k_GroundedStickingVelocityMultiplier;
             }
+        }
+        public void MultiplyMaxSpeed(float multiplier)
+        {
+            maxSpeed = maxSpeed * multiplier;
         }
 
         public Vector2 GetMoveVector()
@@ -422,6 +576,8 @@ namespace Gamekit2D
 
         public void GroundedHorizontalMovement(bool useInput, float speedScale = 1f)
         {
+            if (Dash())
+                return;
             float desiredSpeed = useInput ? PlayerInput.Instance.Horizontal.Value * maxSpeed * speedScale : 0f;
             float acceleration = useInput && PlayerInput.Instance.Horizontal.ReceivingInput ? groundAcceleration : groundDeceleration;
             m_MoveVector.x = Mathf.MoveTowards(m_MoveVector.x, desiredSpeed, acceleration * Time.deltaTime);
@@ -445,6 +601,7 @@ namespace Gamekit2D
                 {//only play the landing sound if falling "fast" enough (avoid small bump playing the landing sound)
                     landingAudioPlayer.PlayRandomSound(m_CurrentSurface);
                 }
+                m_Animator.SetBool(m_HashIsGlidingPara, false);
             }
             else
                 m_CurrentSurface = null;
@@ -561,11 +718,30 @@ namespace Gamekit2D
             m_MoveVector.y -= gravity * Time.deltaTime;
         }
 
+
+        public bool StillHasJumps()
+        {
+            return numberOfJumps > 0;
+        }
+
+        public bool IsGrounded() {
+            return m_CharacterController2D.IsGrounded;
+        }
+
+        public void RemoveJump() {
+            numberOfJumps--;
+        }
+        public void AddJump() {
+            numberOfJumps++;
+        }
         public bool CheckForJumpInput()
         {
             return PlayerInput.Instance.Jump.Down;
         }
-
+        public void ResetJumps()
+        {
+            numberOfJumps = maxNumberOfJumps;
+        }
         public bool CheckForFallInput()
         {
             return PlayerInput.Instance.Vertical.Value < -float.Epsilon && PlayerInput.Instance.Jump.Down;
@@ -716,12 +892,12 @@ namespace Gamekit2D
         {
             PlayerInput.Instance.ReleaseControl(true);
             yield return new WaitForSeconds(1.0f); //wait one second before respawing
-            yield return StartCoroutine(ScreenFader.FadeSceneOut(useCheckPoint ? ScreenFader.FadeType.Black : ScreenFader.FadeType.GameOver));
+            // yield return StartCoroutine(ScreenFader.FadeSceneOut(useCheckPoint ? ScreenFader.FadeType.Black : ScreenFader.FadeType.GameOver));
             if(!useCheckPoint)
                 yield return new WaitForSeconds (2f);
             Respawn(resetHealth, useCheckPoint);
             yield return new WaitForEndOfFrame();
-            yield return StartCoroutine(ScreenFader.FadeSceneIn());
+            // yield return StartCoroutine(ScreenFader.FadeSceneIn());
             PlayerInput.Instance.GainControl();
         }
 
@@ -758,6 +934,10 @@ namespace Gamekit2D
             meleeDamager.DisableDamage();
         }
 
+        public void JumpSound() {
+            Debug.Log("JumpSound");
+            jumpAudioPlayer.PlayRandomSound();
+        }
         public void TeleportToColliderBottom()
         {
             Vector2 colliderBottom = m_CharacterController2D.Rigidbody2D.position + m_Capsule.offset + Vector2.down * m_Capsule.size.y * 0.5f;
@@ -766,7 +946,7 @@ namespace Gamekit2D
 
         public void PlayFootstep()
         {
-            footstepAudioPlayer.PlayRandomSound(m_CurrentSurface);
+            footstepAudioPlayer.PlayRandomSound();
             var footstepPosition = transform.position;
             footstepPosition.z -= 1;
             VFXController.Instance.Trigger("DustPuff", footstepPosition, 0, false, null, m_CurrentSurface);
@@ -777,6 +957,7 @@ namespace Gamekit2D
             if (resetHealth)
                 damageable.SetHealth(damageable.startingHealth);
 
+            GameObject.FindObjectOfType<TimerSystem>().RemoveTime(timePenaltyForDying);
             //we reset the hurt trigger, as we don't want the player to go back to hurt animation once respawned
             m_Animator.ResetTrigger(m_HashHurtPara);
             if (m_FlickerCoroutine != null)
@@ -786,7 +967,7 @@ namespace Gamekit2D
 
             m_Animator.SetTrigger(m_HashRespawnPara);
 
-            if (useCheckpoint && m_LastCheckpoint != null)
+            if (m_LastCheckpoint != null)
             {
                 UpdateFacing(m_LastCheckpoint.respawnFacingLeft);
                 GameObjectTeleporter.Teleport(gameObject, m_LastCheckpoint.transform.position);
@@ -796,10 +977,14 @@ namespace Gamekit2D
                 UpdateFacing(m_StartingFacingLeft);
                 GameObjectTeleporter.Teleport(gameObject, m_StartingPosition);
             }
+            SkillsManager.Instance.transform.parent.position = transform.position + new Vector3(0, 2, 0);
+            respawnAudioPlayer.PlayRandomSound();
+
         }
 
         public void SetChekpoint(Checkpoint checkpoint)
         {
+            Debug.Log("SetCheckpoint");
             m_LastCheckpoint = checkpoint;
         }
 

@@ -21,7 +21,7 @@ SpriteAtlas:
       crunchedCompression: 0
       sRGB: 1
     platformSettings:
-    - serializedVersion: 2
+    - serializedVersion: 3
       m_BuildTarget: DefaultTexturePlatform
       m_MaxTextureSize: 8192
       m_ResizeAlgorithm: 0
@@ -32,6 +32,7 @@ SpriteAtlas:
       m_AllowsAlphaSplitting: 0
       m_Overridden: 0
       m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 1
     packingSettings:
       serializedVersion: 2
       padding: 4
@@ -39,11 +40,14 @@ SpriteAtlas:
       allowAlphaSplitting: 0
       enableRotation: 1
       enableTightPacking: 1
+    secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 7b200a58dfffd8d45b54454b1cb82151, type: 3}
-    totalSpriteSurfaceArea: 98929035
+    totalSpriteSurfaceArea: 113672925
     bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: e4381a10685b28d4f906cc686ecbc2c7, type: 3}
@@ -61,6 +65,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a53475b08393802498550588cf70ef5e, type: 3}
   - {fileID: 21300000, guid: 129972c0ed661da47bd600512df59822, type: 3}
   - {fileID: 21300000, guid: e7f298e049bf3bb41bca4bbd8ceee9ad, type: 3}
+  - {fileID: 21300000, guid: 4ebecee0ddb271144b1947c079a9e43c, type: 3}
   - {fileID: 21300000, guid: 28b55e113ed8d2e499533bc878cf9c3e, type: 3}
   - {fileID: 21300000, guid: b38254315edf5904d987dbca58a71ca0, type: 3}
   - {fileID: 21300000, guid: 5d25d9e1de070994db63a462e89932d7, type: 3}
@@ -73,6 +78,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5b1c7342d6504e3448979307c3f6a639, type: 3}
   - {fileID: 21300000, guid: 2350b442f31bb1741b68a6b77d09d40b, type: 3}
   - {fileID: 21300000, guid: 4d25e8426524e5d43a92fe2d594e4912, type: 3}
+  - {fileID: 21300000, guid: 70a50562b29fcec488b3b449827e9cfb, type: 3}
   - {fileID: 21300000, guid: 28e829622ce5c974bbf154a278a2be22, type: 3}
   - {fileID: 21300000, guid: 190f2e72bd4df1945b2d504efccde46c, type: 3}
   - {fileID: 21300000, guid: 55e66892de31d424885bc2c774f07ef7, type: 3}
@@ -85,8 +91,11 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 453c8803862e72b43ad3652b8fe03437, type: 3}
   - {fileID: 21300000, guid: 575f490323d76254ab8d5d4cd472a3ea, type: 3}
   - {fileID: 21300000, guid: 7dcbef0330b37354dae1c1071956813a, type: 3}
+  - {fileID: 21300000, guid: 1431ea13bd50fc34aaab76c1f77be1c1, type: 3}
   - {fileID: 21300000, guid: a9f05e230fdd41b4f99ac0e0b7c4fa2b, type: 3}
   - {fileID: 21300000, guid: 12ea17332fa174442af48960686e1769, type: 3}
+  - {fileID: 21300000, guid: f3921f4329d09d24fb0a7425c48e5aa0, type: 3}
+  - {fileID: 21300000, guid: 62b75153b9749b44b853d986a0cd1780, type: 3}
   - {fileID: 21300000, guid: 4b74c95301673024c9dbf47514f2cb5b, type: 3}
   - {fileID: 21300000, guid: 6f8b0a53ff8c9e94f9d4af829e2ad6f3, type: 3}
   - {fileID: 21300000, guid: c93003632dfb3f346ae28336c8748cc1, type: 3}
@@ -94,7 +103,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: baa7eb63e6b2764408c3c44ea0b180ac, type: 3}
   - {fileID: 21300000, guid: 27bc49736a5db6d44b8ae392a1ee34dd, type: 3}
   - {fileID: 21300000, guid: 3bcc6973de396d247a99745a0c323d38, type: 3}
+  - {fileID: 21300000, guid: 987aa9831d1f68c4fa5953674e019ea1, type: 3}
   - {fileID: 21300000, guid: e701f6d3a4296e040ad8604e7ceaad2a, type: 3}
+  - {fileID: 21300000, guid: 044e08d3ac7d0454a9f06af1d2028688, type: 3}
   - {fileID: 21300000, guid: 1877f93426f7f3848a2d0ec5ec6ee4a1, type: 3}
   - {fileID: 21300000, guid: 3fc8ba344d4587942a0b607b47985569, type: 3}
   - {fileID: 21300000, guid: ae6184443cb4d0f439bab73e9e76df4a, type: 3}
@@ -104,6 +115,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 78a64664c88ec60478ced92e86dbb784, type: 3}
   - {fileID: 21300000, guid: fe80dd64b9b2e1647b367fe8da273bf7, type: 3}
   - {fileID: 21300000, guid: 19b07ba4ccec70d4ebe4ed5e538cd326, type: 3}
+  - {fileID: 21300000, guid: ef04bba4754c6c041ae57373a9aa9c21, type: 3}
   - {fileID: 21300000, guid: eef4c8c406166bd4c848e87480efa2bd, type: 3}
   - {fileID: 21300000, guid: 665bd6d4ae06fea488861b4bdad2f04d, type: 3}
   - {fileID: 21300000, guid: 929a47e4f89792c4aa28ae41634348c3, type: 3}
@@ -112,6 +124,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c195730543b85df41953d682fee276b3, type: 3}
   - {fileID: 21300000, guid: 92fbfb056ce42c940aa543cf14a9084a, type: 3}
   - {fileID: 21300000, guid: 7fb83f0538f2eaf4a9c6f3b08b60cab4, type: 3}
+  - {fileID: 21300000, guid: db5eac15edc72874aace647dc17043d6, type: 3}
   - {fileID: 21300000, guid: 46fc6025308929d4b878bfb4b81ead12, type: 3}
   - {fileID: 21300000, guid: 05df8025a12814d46b434681a6989133, type: 3}
   - {fileID: 21300000, guid: 92f985257d4b81740b246818800efccd, type: 3}
@@ -119,6 +132,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: bce1db75cf9f0c7448eb419ad2e38c8a, type: 3}
   - {fileID: 21300000, guid: 0adb3b85a77225b42823314ce0caedd3, type: 3}
   - {fileID: 21300000, guid: 1d7a01952b6b7e4409c83ade1ead91db, type: 3}
+  - {fileID: 21300000, guid: 1002f995095bb31459070eaf32a6622d, type: 3}
   - {fileID: 21300000, guid: 0b26c4d5c6b04e940932afa1ffa8284f, type: 3}
   - {fileID: 21300000, guid: 1fa29ad54380226498c2250e612fec93, type: 3}
   - {fileID: 21300000, guid: fcec6de5f73f3b74480aa66ffac97f43, type: 3}
@@ -137,18 +151,23 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b0cff70733e6b0b41a5ad812ead6cd8b, type: 3}
   - {fileID: 21300000, guid: bb6a891737c56e6438e808fb4e716321, type: 3}
   - {fileID: 21300000, guid: 9528c4275cc1a114f9e755b4d9084936, type: 3}
+  - {fileID: 21300000, guid: 4ba4ea37f450385419084d581f350975, type: 3}
   - {fileID: 21300000, guid: 881250471e7213f42819ba1d7bb1d4e0, type: 3}
+  - {fileID: 21300000, guid: ecd61547c848657448b8d44e2e1a6eeb, type: 3}
   - {fileID: 21300000, guid: c4d7d6470acd7bf45971042161c6e018, type: 3}
   - {fileID: 21300000, guid: f3e9585781fa62242a3018cd3dd529dd, type: 3}
   - {fileID: 21300000, guid: c6b584771aee7a148bcf2885a6f347ba, type: 3}
   - {fileID: 21300000, guid: 49594577334bdee479b8dd58aedf1d60, type: 3}
   - {fileID: 21300000, guid: ec7d0c8717f6c3b428b3f277de956cea, type: 3}
+  - {fileID: 21300000, guid: eed66497a6c934c409e6f2a612fad730, type: 3}
   - {fileID: 21300000, guid: 45ed26a75477df843a013176e95192a9, type: 3}
   - {fileID: 21300000, guid: cb0f74b7e0e21ee47b09fdb24a83094f, type: 3}
   - {fileID: 21300000, guid: 686160c7c3cfd5040a8ea08b867ff56c, type: 3}
+  - {fileID: 21300000, guid: 42c0c3c767a4c124a951014057ab1a6f, type: 3}
   - {fileID: 21300000, guid: b0acf1d76f96df547a6135841ee354f8, type: 3}
   - {fileID: 21300000, guid: 1eb8ffe712da55942b19d29be7a6e5da, type: 3}
   - {fileID: 21300000, guid: fe5165f702e35144684bf593203a031c, type: 3}
+  - {fileID: 21300000, guid: 55227df71a3dc2342a9fa8a43b46eb6d, type: 3}
   - {fileID: 21300000, guid: 63290ff7381eab84eb49e7b9345c809f, type: 3}
   - {fileID: 21300000, guid: 455b6008820c4b143bdc7ed7c6cd29c4, type: 3}
   - {fileID: 21300000, guid: 5767e2180fcbb7a4d9980e9a37e3d588, type: 3}
@@ -169,31 +188,40 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4ad59af83f2bcde4681baeba9d0d90c8, type: 3}
   - {fileID: 21300000, guid: 76089009971280441963c2a3a55b5071, type: 3}
   - {fileID: 21300000, guid: e9154409f452b244b9db4c7de97dff28, type: 3}
+  - {fileID: 21300000, guid: ed592f197bf615b4c9c71799a83a25a8, type: 3}
   - {fileID: 21300000, guid: 4214a14962bcf4943baf9e184b9b928e, type: 3}
   - {fileID: 21300000, guid: a9e9e74909b5a0947a093069d6a017cc, type: 3}
   - {fileID: 21300000, guid: 59b767590592a9e4685835a20cf41d69, type: 3}
+  - {fileID: 21300000, guid: e08062698ab8ea64bae86ac0b050c531, type: 3}
   - {fileID: 21300000, guid: 82bf8779d3330604c9cec1bf2f219329, type: 3}
   - {fileID: 21300000, guid: 8feedb9983dae0d49a492dae5bbbf6d6, type: 3}
   - {fileID: 21300000, guid: e62f4ca9760884b4cb9ff0c3025838db, type: 3}
+  - {fileID: 21300000, guid: b267fca9b59041241bb654f85b4b32e9, type: 3}
+  - {fileID: 21300000, guid: 27fdddb9d611fff4eb91350a27e7015a, type: 3}
   - {fileID: 21300000, guid: c63c69d9fdf411147aede23769d5fcfc, type: 3}
   - {fileID: 21300000, guid: bb0dc30aba14f084b9f20cd11d7f59d8, type: 3}
   - {fileID: 21300000, guid: 852dea1a4d9a29a45b32e544647320ad, type: 3}
   - {fileID: 21300000, guid: c865be1abede9a048a20b6904ee2219a, type: 3}
+  - {fileID: 21300000, guid: 5a81e44af49b9454f9c22d39e3dd17e1, type: 3}
   - {fileID: 21300000, guid: 13aa9a4a1bc68064c9e5e17a86df2666, type: 3}
   - {fileID: 21300000, guid: 3db4a46ab9121ab4c82e33ae0f3d8710, type: 3}
+  - {fileID: 21300000, guid: 2ce71e6adcfb6354180c145f58254639, type: 3}
   - {fileID: 21300000, guid: b38d007a84ef48c45b4026b9be16e76b, type: 3}
   - {fileID: 21300000, guid: d2d936bae69c599429ee1a386892a9f0, type: 3}
   - {fileID: 21300000, guid: f645b6da0a4688d4288e29bcffabc941, type: 3}
   - {fileID: 21300000, guid: e94248daa5c32774fbf35a1cb4ecc4de, type: 3}
+  - {fileID: 21300000, guid: a49849ea6afb1dc42bf57fea8384714f, type: 3}
   - {fileID: 21300000, guid: 35322bfa3901c9145821274537244b1d, type: 3}
   - {fileID: 21300000, guid: 6b460d0b7c81b4d4cb5f131f7eeda623, type: 3}
   - {fileID: 21300000, guid: ec69df1b25263e844aa6c00cbb388ea6, type: 3}
   - {fileID: 21300000, guid: bf9cb13b45f6dfe41970b547e98bb782, type: 3}
   - {fileID: 21300000, guid: 6dcde73b5ddc21d4582ec3468a22cda5, type: 3}
   - {fileID: 21300000, guid: 438b3b4b88bde4f4c9770d84b50b772b, type: 3}
+  - {fileID: 21300000, guid: 8e46e05b46f47c64d9df8396f4d3779a, type: 3}
   - {fileID: 21300000, guid: 634ae46b18d6e8e42a8359e8219fa81c, type: 3}
   - {fileID: 21300000, guid: 5b13d17b360e2a64cbc7b4a2ac4cd375, type: 3}
   - {fileID: 21300000, guid: e67c667b7a6a3664a8f22db00d76ad38, type: 3}
+  - {fileID: 21300000, guid: 2fcf7b7bed3229544b5d6ca7ca51d662, type: 3}
   - {fileID: 21300000, guid: aacc218bfa62aef41920035f78af31e8, type: 3}
   - {fileID: 21300000, guid: 86106dab9033ac7448f28ca19c407c2a, type: 3}
   - {fileID: 21300000, guid: b53b9dcb8117dfe4ab1c5a250703548c, type: 3}
@@ -208,6 +236,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 0a78267c907b61449a0367178cabe70c, type: 3}
   - {fileID: 21300000, guid: c39af18c1c6c80841b32ec80316d1e87, type: 3}
   - {fileID: 21300000, guid: cd65a99c817869946969cd216cab2115, type: 3}
+  - {fileID: 21300000, guid: 19ef8d9c1e6c97247a5f0b2fc665e0e5, type: 3}
   - {fileID: 21300000, guid: 79d7163dfd26ad748bf88cdc6b98d2f5, type: 3}
   - {fileID: 21300000, guid: 8f8e5b3d53a0deb4d88a6a25a3db5ac4, type: 3}
   - {fileID: 21300000, guid: 049cab3d3a32a3a45856ca44f223ced1, type: 3}
@@ -215,6 +244,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: aa9e3d4d344a1c548a75a061ab69c3fb, type: 3}
   - {fileID: 21300000, guid: 31d88d4dbed3d9546898b42447a63e77, type: 3}
   - {fileID: 21300000, guid: 9989c37dedfecfa4591fd9f1821713cb, type: 3}
+  - {fileID: 21300000, guid: da4601ad0c27ce044aac37e3daf43af5, type: 3}
   - {fileID: 21300000, guid: ff33d6adfeac52e419af23fad2d0abfd, type: 3}
   - {fileID: 21300000, guid: 60a2cfad92429cc4b9d2f6ce7148c37a, type: 3}
   - {fileID: 21300000, guid: df6f54cd95dfdf148a5c4cc0aca6d49f, type: 3}
@@ -222,6 +252,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e79c55edf28318b44b614f2eaf6cbb45, type: 3}
   - {fileID: 21300000, guid: c7cf710ee57c1ae45aac513a85fcff07, type: 3}
   - {fileID: 21300000, guid: 904a520e37320ab4aa482b623e1d52f4, type: 3}
+  - {fileID: 21300000, guid: 71243e0e5ecf4b64eb38912778e45bef, type: 3}
   - {fileID: 21300000, guid: a4d1991ea98b3684c99f8728d28ec652, type: 3}
   - {fileID: 21300000, guid: 2d24972ef326cbf4d95898e1bee82f8e, type: 3}
   - {fileID: 21300000, guid: 0b69f35e166d1704f987340b84eaefe6, type: 3}
@@ -236,9 +267,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 39f2b1de192463d41a4339ee2b5f2074, type: 3}
   - {fileID: 21300000, guid: eb350ede4895d6d418689eb126b772cb, type: 3}
   - {fileID: 21300000, guid: 1b0ea6ee3d93339468688584fa8f3bb9, type: 3}
+  - {fileID: 21300000, guid: 42f27efeed2892b4d973dabd1ef41b3e, type: 3}
+  - {fileID: 21300000, guid: 57a6fefe7751ba14dbb35de97188793c, type: 3}
   - {fileID: 21300000, guid: 657c921f612637e4f8ba1c8c4123d11d, type: 3}
   - {fileID: 21300000, guid: 8a9b494f275a2954aba6b318fc17d9bd, type: 3}
   - {fileID: 21300000, guid: f7f3915fcb9a6744a9a147ed3ee26ebe, type: 3}
+  - {fileID: 21300000, guid: 7081396f6b7298545974c7ca04d36a80, type: 3}
   - {fileID: 21300000, guid: a3b4037f6cee2ac4fb949a47aa4a4d76, type: 3}
   - {fileID: 21300000, guid: d6e05ebf12ef9164c9b792b7088c0bdd, type: 3}
   - {fileID: 21300000, guid: 261da5cf99e3c864e9079de55f67a437, type: 3}
@@ -262,6 +296,7 @@ SpriteAtlas:
   - Anim_IDLE_00009
   - Anim_IDLE_WITHGUN_00023
   - Anim_RUN_WithGun_00011
+  - IDLE_ANIMATION020003
   - Anim_IDLE_WITHGUN_00001
   - Ellen_WALK_025
   - ELLEN_RUN_NoGun_11
@@ -274,6 +309,7 @@ SpriteAtlas:
   - Anim_StaffAttack_Type1_00007
   - Anim_JUMPwithGUN_04
   - Anim_PUSH_00005
+  - IDLE_ANIMATION020014
   - Anim_JUMPwithGUN_15
   - Anim_DEATH_00023
   - Ellen_RUN_GunOut_1s_00015
@@ -286,8 +322,11 @@ SpriteAtlas:
   - ELLEN_RUN_NoGun_14
   - Anim_HURT_00007
   - Anim_JUMP_11
+  - IDLE_ANIMATION020025
   - Anim_JUMP_08
   - ELLEN_RUN_NoGun_02
+  - IDLE_ANIMATION020007
+  - IDLE_ANIMATION020016
   - Anim_RUN_WithGun_00003
   - Anim_JUMP_03
   - Anim_JUMPwithGUN_06
@@ -295,7 +334,9 @@ SpriteAtlas:
   - Anim_DEATH_00015
   - Ellen_WALK_GUNOUT_027
   - Anim_RUN_WithGun_00015
+  - IDLE_ANIMATION020009
   - Ellen_RUN_GunOut_1s_00018
+  - IDLE_ANIMATION020010
   - Anim_IDLE_WITHGUN_00015
   - Ellen_RUN_GunOut_1s_00020
   - Anim_JUMP_09
@@ -305,6 +346,7 @@ SpriteAtlas:
   - Anim_PUSH_00009
   - Ellen_CrouchWithGun01
   - Ellen_RUN_GunOut_1s_00009
+  - IDLE_ANIMATION020000
   - Anim_DEATH_00025
   - Anim_PUSH_00007
   - Ellen_WALK_005
@@ -313,6 +355,7 @@ SpriteAtlas:
   - Anim_DEATH_00009
   - Ellen_RUN_GunOut_1s_00007
   - Ellen_RUN_GunOut_1s_00001
+  - IDLE_ANIMATION020004
   - Ellen_WALK_GUNOUT_019
   - ELLEN_RUN_NoGun_10
   - Anim_StaffAttack_Type1_00005
@@ -320,6 +363,7 @@ SpriteAtlas:
   - Anim_JUMPwithGUN_19
   - Anim_HURT_00009
   - Ellen_WALK_GUNOUT_003
+  - IDLE_ANIMATION020026
   - Anim_DEATH_00003
   - Anim_IDLE_00003
   - Anim_JUMP_10
@@ -338,18 +382,23 @@ SpriteAtlas:
   - Anim_IDLE_WITHGUN_00013
   - Anim_JUMP_06
   - Anim_PUSH_00023
+  - IDLE_ANIMATION020019
   - Anim_PUSH_00027
+  - IDLE_ANIMATION020015
   - Anim_IDLE_00001
   - Ellen_WALK_023
   - Anim_IDLE_00011
   - Anim_JUMPwithGUN_12
   - Ellen_WALK_003
+  - IDLE_ANIMATION020011
   - ELLEN_RUN_NoGun_03
   - Anim_JUMP_19
   - Anim_JUMP_18
+  - IDLE_ANIMATION020021
   - Anim_IDLE_WITHGUN_00027
   - Anim_JUMP_16
   - Anim_JUMPwithGUN_09
+  - IDLE_ANIMATION020029
   - Anim_PUSH_00029
   - Anim_IDLE_WITHGUN_00019
   - Anim_JUMP_01
@@ -370,31 +419,40 @@ SpriteAtlas:
   - Ellen_WALK_GUNOUT_009
   - Anim_IDLE_00019
   - Ellen_WALK_GUNOUT_001
+  - IDLE_ANIMATION020005
   - Anim_JUMP_05
   - Anim_CROUCH_00009
   - Anim_DEATH_00007
+  - IDLE_ANIMATION020012
   - Ellen_WALK_027
   - Ellen_WALK_GUNOUT_025
   - Ellen_CrouchWithGun04
+  - IDLE_ANIMATION020002
+  - IDLE_ANIMATION020027
   - Anim_RUN_WithGun_00007
   - Ellen_WALK_021
   - Anim_PUSH_00025
   - Ellen_WALK_019
+  - IDLE_ANIMATION020020
   - Anim_JUMP_15
   - Anim_PUSH_00015
+  - IDLE_ANIMATION020018
   - Ellen_WALK_001
   - Anim_IDLE_00025
   - Anim_HURT_00011
   - Ellen_RUN_GunOut_1s_00010
+  - IDLE_ANIMATION020017
   - Anim_DEATH_00019
   - Ellen_RUN_GunOut_1s_00017
   - Anim_DEATH_00021
   - Anim_RUN_WithGun_00017
   - Ellen_WALK_GUNOUT_029
   - Ellen_RUN_GunOut_1s_00021
+  - IDLE_ANIMATION020013
   - Anim_JUMPwithGUN_01
   - Anim_JUMPwithGUN_11
   - Ellen_WALK_GUNOUT_005
+  - IDLE_ANIMATION020008
   - Anim_JUMPwithGUN_16
   - Anim_JUMPwithGUN_13
   - Anim_JUMPwithGUN_07
@@ -409,6 +467,7 @@ SpriteAtlas:
   - Anim_IDLE_WITHGUN_00029
   - Ellen_WALK_GUNOUT_021
   - Anim_IDLE_00021
+  - IDLE_ANIMATION020024
   - ELLEN_RUN_NoGun_16
   - Anim_IDLE_WITHGUN_00011
   - Anim_JUMPwithGUN_17
@@ -416,6 +475,7 @@ SpriteAtlas:
   - Anim_StaffAttack_Type1_00003
   - Anim_JUMP_17
   - ELLEN_RUN_NoGun_12
+  - IDLE_ANIMATION020023
   - ELLEN_RUN_NoGun_01
   - Anim_IDLE_00013
   - Anim_RUN_WithGun_00019
@@ -423,6 +483,7 @@ SpriteAtlas:
   - Ellen_RUN_GunOut_1s_00005
   - Anim_IDLE_00005
   - Ellen_RUN_GunOut_1s_00011
+  - IDLE_ANIMATION020006
   - Ellen_CrouchWithGun00
   - Ellen_WALK_GUNOUT_007
   - Anim_JUMPwithGUN_18
@@ -437,9 +498,12 @@ SpriteAtlas:
   - Anim_RUN_WithGun_00021
   - ELLEN_RUN_NoGun_15
   - Anim_HURT_00013
+  - IDLE_ANIMATION020022
+  - IDLE_ANIMATION020028
   - Ellen_WALK_GUNOUT_013
   - Anim_RUN_WithGun_00013
   - Anim_RUN_WithGun_00009
+  - IDLE_ANIMATION020001
   - Ellen_RUN_GunOut_1s_00006
   - Ellen_RUN_GunOut_1s_00012
   - Ellen_CrouchWithGun03
@@ -447,5 +511,6 @@ SpriteAtlas:
   - Anim_CROUCH_00007
   - ELLEN_RUN_NoGun_19
   - Anim_DEATH_00017
+  m_RenderDataMap: {}
   m_Tag: EllenAtlas
   m_IsVariant: 0

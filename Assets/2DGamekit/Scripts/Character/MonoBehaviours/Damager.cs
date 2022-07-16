@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -38,6 +39,7 @@ namespace Gamekit2D
 
         protected bool m_SpriteOriginallyFlipped;
         protected bool m_CanDamage = true;
+        protected bool m_hasDamaged = false;
         protected ContactFilter2D m_AttackContactFilter;
         protected Collider2D[] m_AttackOverlapResults = new Collider2D[10];
         protected Transform m_DamagerTransform;
@@ -64,42 +66,41 @@ namespace Gamekit2D
         {
             m_CanDamage = false;
         }
+        private void OnTriggerStay2D(Collider2D other) {
+            if (!m_CanDamage)
+                return;
+            if (other.gameObject.layer != LayerMask.NameToLayer("Player")) return;
+            m_AttackOverlapResults[0] = other;
+            m_hasDamaged = true;
+            
+        }
+        IEnumerator PauseDamage() {
+            m_CanDamage = false;
+            yield return new WaitForSeconds(2f);
+            m_CanDamage = true;
+        }
 
         void FixedUpdate()
         {
-            if (!m_CanDamage)
-                return;
+            if (!m_CanDamage) return;
+            if (!m_hasDamaged) return;
+            m_LastHit = m_AttackOverlapResults[0];
+            Damageable damageable = m_LastHit.GetComponent<Damageable>();
 
-            Vector2 scale = m_DamagerTransform.lossyScale;
-
-            Vector2 facingOffset = Vector2.Scale(offset, scale);
-            if (offsetBasedOnSpriteFacing && spriteRenderer != null && spriteRenderer.flipX != m_SpriteOriginallyFlipped)
-                facingOffset = new Vector2(-offset.x * scale.x, offset.y * scale.y);
-
-            Vector2 scaledSize = Vector2.Scale(size, scale);
-
-            Vector2 pointA = (Vector2)m_DamagerTransform.position + facingOffset - scaledSize * 0.5f;
-            Vector2 pointB = pointA + scaledSize;
-
-            int hitCount = Physics2D.OverlapArea(pointA, pointB, m_AttackContactFilter, m_AttackOverlapResults);
-
-            for (int i = 0; i < hitCount; i++)
+            if (damageable)
             {
-                m_LastHit = m_AttackOverlapResults[i];
-                Damageable damageable = m_LastHit.GetComponent<Damageable>();
-
-                if (damageable)
-                {
-                    OnDamageableHit.Invoke(this, damageable);
-                    damageable.TakeDamage(this, ignoreInvincibility);
-                    if (disableDamageAfterHit)
-                        DisableDamage();
-                }
-                else
-                {
-                    OnNonDamageableHit.Invoke(this);
-                }
+                OnDamageableHit.Invoke(this, damageable);
+                damageable.TakeDamage(this, ignoreInvincibility);
+                StartCoroutine(PauseDamage());
+                if (disableDamageAfterHit)
+                    DisableDamage();
+                m_hasDamaged = false;
             }
+            else
+            {
+                OnNonDamageableHit.Invoke(this);
+            }
+            
         }
     }
 }
