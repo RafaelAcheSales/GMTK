@@ -52,6 +52,7 @@ public class Dice : MonoBehaviour
             }
         }
         print("Result: " + result);
+        SkillsManager.Instance.ChangeSkill(KeyCodeToIndex(throwKey), result);
     }
     void resetDice() {
         rb.MovePosition(player.transform.position + offset);
@@ -63,4 +64,18 @@ public class Dice : MonoBehaviour
         yield return new WaitForSeconds(0.6f);
         rolling = true;
     }
+
+    int KeyCodeToIndex(KeyCode key) {
+        switch (key) {
+            case KeyCode.Alpha1:
+                return 0;
+            case KeyCode.Alpha2:
+                return 1;
+            case KeyCode.Alpha3:
+                return 2;
+            default:
+                return -1;
+        }
+    }
+
 }

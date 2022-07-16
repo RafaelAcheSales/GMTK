@@ -35,6 +35,9 @@ namespace Gamekit2D
         public float timePenaltyForDying = 20f;
         public float shieldEffectTime = 1f;
         public float shieldReload = 10f;
+
+        
+
         public bool isGliding = false;
         public float glideSpeed = 3f;
         public int numberOfRaycasts = 2;
@@ -47,6 +50,7 @@ namespace Gamekit2D
         public int maxNumberOfJumps = 3;
         public float dashAcceleration = 2f;
         public float dashReloadTime = 1f;
+        public float wallGrabDuration = 0.2f;
         public float maxSpeed = 10f;
         public float groundAcceleration = 100f;
         public float groundDeceleration = 100f;
@@ -523,9 +527,43 @@ namespace Gamekit2D
                 m_MoveVector.y = -gravity * Time.deltaTime * k_GroundedStickingVelocityMultiplier;
             }
         }
-        public void MultiplyMaxSpeed(float multiplier)
+        public void IncreaseMaxSpeed(float multiplier)
         {
             maxSpeed = maxSpeed * multiplier;
+        }
+
+        public void ReduceMaxSpeed(float multiplier)
+        {
+            maxSpeed = maxSpeed / multiplier;
+        }
+
+        public void ReduceDashCooldown(float a)
+        {
+            dashReloadTime = dashReloadTime / a;
+        }
+
+        public void IncreaseDashCooldown(float a)
+        {
+            dashReloadTime = dashReloadTime * a;
+        }
+
+        public void ReduceShieldCoolDown(float a)
+        {
+            shieldReload = shieldReload / a;
+        }
+        public void IncreaseShieldCoolDown(float a)
+        {
+            shieldReload = shieldReload * a;
+        }
+
+        public void IncreaseWallGrabDuration(float a)
+        {
+            wallGrabDuration = wallGrabDuration * a;
+        }
+
+        public void ReduceWallGrabDuration(float a)
+        {
+            wallGrabDuration = wallGrabDuration / a;
         }
 
         public Vector2 GetMoveVector()

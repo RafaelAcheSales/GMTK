@@ -15,6 +15,7 @@ public class Skill : MonoBehaviour
         Dash,
         Shield,
         WallGrab,
+        Glide,
 
     }
     public enum SkillState {

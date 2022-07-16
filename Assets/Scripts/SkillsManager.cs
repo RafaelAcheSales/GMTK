@@ -17,9 +17,19 @@ public class SkillsManager : Singleton<SkillsManager>
     public AudioSource audioSource;
 
     Dictionary<Skill.SkillType, Func<float, bool>> skillActivationCallbacks = new Dictionary<Skill.SkillType, Func<float, bool>>() {
-        {Skill.SkillType.MoveSpeed, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().MultiplyMaxSpeed(a); return true; }},
+        {Skill.SkillType.MoveSpeed, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().IncreaseMaxSpeed(a); return true; }},
         {Skill.SkillType.AditionalJump, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().AddJump(); return true; }},
+        {Skill.SkillType.Dash, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().ReduceDashCooldown(a); return true; }},
+        {Skill.SkillType.Shield, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().ReduceShieldCoolDown(a); return true; }},
+        {Skill.SkillType.WallGrab, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().IncreaseWallGrabDuration(a); return true; }},
+    };
 
+    Dictionary<Skill.SkillType, Func<float, bool>> skillDeactivationCallbacks = new Dictionary<Skill.SkillType, Func<float, bool>>() {
+        {Skill.SkillType.MoveSpeed, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().ReduceMaxSpeed(a); return true; }},
+        {Skill.SkillType.AditionalJump, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().RemoveJump(); return true; }},
+        {Skill.SkillType.Dash, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().IncreaseDashCooldown(a); return true; }},
+        {Skill.SkillType.Shield, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().IncreaseShieldCoolDown(a); return true; }},
+        {Skill.SkillType.WallGrab, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().ReduceWallGrabDuration(a); return true; }},
     };
 
 
@@ -33,10 +43,14 @@ public class SkillsManager : Singleton<SkillsManager>
         return skills.Any(tuple => tuple.Item1 == skillType && tuple.Item2.skillState == Skill.SkillState.Active);
     }
 
-    public void ChangeSkill(int index, Skill newSkill) {
+    public void ChangeSkill(int index, int newSkillIndex) {
         Skill oldSkill = activeSkills[index];
-        
-
+        skillDeactivationCallbacks[oldSkill.skillType](2f);
+        oldSkill.skillState = Skill.SkillState.Locked;
+        Skill newSkill = skills[newSkillIndex].Item2;
+        activeSkills[index] = newSkill;
+        newSkill.skillState = Skill.SkillState.Active;
+        skillActivationCallbacks[newSkill.skillType](2f);
     }
 
     
