@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 2678000646867031340}
   - component: {fileID: 2161678477747624531}
   - component: {fileID: 3189809911304287335}
-  m_Layer: 0
+  - component: {fileID: 73721950498531814}
+  m_Layer: 6
   m_Name: Tile_Ruins_Tiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,3 +83,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!61 &73721950498531814
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5543966958777905618}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.000006198883, y: -0.0000076293945}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.1407015, y: 2.1407015}
+  m_EdgeRadius: 0
