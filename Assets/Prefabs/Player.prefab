@@ -43,7 +43,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243686457154912612, guid: 74cb2eead3628fa47a369c51a45d99a1,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 47176d193e263014bab4d0115bf7175a, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -142,8 +142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 307d3262c3c0b9247bc73ae028ece302, type: 3}
-  - {fileID: 8300000, guid: 307d3262c3c0b9247bc73ae028ece302, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   overrides: []
   randomizePitch: 1
   pitchRange: 0.2
@@ -933,7 +933,7 @@ MonoBehaviour:
     controllerButton: 4
     m_Enabled: 1
   MeleeAttack:
-    key: 107
+    key: 323
     controllerButton: 3
     m_Enabled: 1
   RangedAttack:
@@ -999,6 +999,7 @@ MonoBehaviour:
   dashAcceleration: 5
   dashReloadTime: 2
   wallGrabDuration: 0.2
+  slashCooldown: 0.5
   maxSpeed: 7
   groundAcceleration: 100
   groundDeceleration: 100
@@ -1011,7 +1012,7 @@ MonoBehaviour:
   hurtJumpAngle: 45
   hurtJumpSpeed: 8
   flickeringDuration: 0.05
-  meleeAttackDashSpeed: 15
+  meleeAttackDashSpeed: 5
   dashWhileAirborne: 1
   footstepAudioPlayer: {fileID: 4026623525684918}
   landingAudioPlayer: {fileID: 4172819445194296}

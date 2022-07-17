@@ -689,11 +689,11 @@ namespace Gamekit2D
             UpdateFacing(damageable.GetDamageDirection().x > 0f);
             damageable.EnableInvulnerability();
 
-            m_Animator.SetTrigger(m_HashHurtPara);
+            // m_Animator.SetTrigger(m_HashHurtPara);
 
             //we only force respawn if helath > 0, otherwise both forceRespawn & Death trigger are set in the animator, messing with each other.
             if(damageable.CurrentHealth > 0 && damager.forceRespawn)
-                m_Animator.SetTrigger(m_HashForcedRespawnPara);
+                // m_Animator.SetTrigger(m_HashForcedRespawnPara);
 
             m_Animator.SetBool(m_HashGroundedPara, false);
             hurtAudioPlayer.PlayRandomSound();
@@ -707,7 +707,7 @@ namespace Gamekit2D
 
         public void OnDie()
         {
-            m_Animator.SetTrigger(m_HashDeadPara);
+            // m_Animator.SetTrigger(m_HashDeadPara);
 
             StartCoroutine(DieRespawnCoroutine(true, false));
         }
@@ -738,11 +738,13 @@ namespace Gamekit2D
 
         public bool CheckForMeleeAttackInput()
         {
+            
             return PlayerInput.Instance.MeleeAttack.Down;
         }
 
         public void MeleeAttack()
         {
+            // if (!ManagerSingleton.Instance.isAnySkillActive(Skill.SkillType.Slash)) return;
             m_Animator.SetTrigger(m_HashMeleeAttackPara);
         }
 
@@ -778,13 +780,13 @@ namespace Gamekit2D
                 damageable.SetHealth(damageable.startingHealth);
 
             //we reset the hurt trigger, as we don't want the player to go back to hurt animation once respawned
-            m_Animator.ResetTrigger(m_HashHurtPara);
+            // m_Animator.ResetTrigger(m_HashHurtPara);
             if (m_FlickerCoroutine != null)
             {//we stop flcikering for the same reason
                 StopFlickering();
             }
 
-            m_Animator.SetTrigger(m_HashRespawnPara);
+            // m_Animator.SetTrigger(m_HashRespawnPara);
 
             if (useCheckpoint && m_LastCheckpoint != null)
             {

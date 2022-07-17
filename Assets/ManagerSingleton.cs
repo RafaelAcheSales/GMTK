@@ -20,4 +20,8 @@ public class ManagerSingleton : Singleton<ManagerSingleton>
         }
         return false;
     }
+    private void Update() {
+        
+    }
+
 }

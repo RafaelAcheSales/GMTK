@@ -18,7 +18,7 @@ public class SkillsManager : MonoBehaviour
 
     Dictionary<Skill.SkillType, Func<float, bool>> skillActivationCallbacks = new Dictionary<Skill.SkillType, Func<float, bool>>() {
         {Skill.SkillType.MoveSpeed, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().IncreaseMaxSpeed(a); return true; }},
-        {Skill.SkillType.AditionalJump, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().AddJump(); return true; }},
+        {Skill.SkillType.AditionalJump, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().AddMaxJumps(); return true; }},
         {Skill.SkillType.Dash, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().ReduceDashCooldown(a); return true; }},
         {Skill.SkillType.Shield, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().ReduceShieldCoolDown(a); return true; }},
         {Skill.SkillType.WallGrab, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().IncreaseWallGrabDuration(a); return true; }},
@@ -27,7 +27,7 @@ public class SkillsManager : MonoBehaviour
 
     Dictionary<Skill.SkillType, Func<float, bool>> skillDeactivationCallbacks = new Dictionary<Skill.SkillType, Func<float, bool>>() {
         {Skill.SkillType.MoveSpeed, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().ReduceMaxSpeed(a); return true; }},
-        {Skill.SkillType.AditionalJump, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().RemoveJump(); return true; }},
+        {Skill.SkillType.AditionalJump, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().RemoveMaxJumps(); return true; }},
         {Skill.SkillType.Dash, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().IncreaseDashCooldown(a); return true; }},
         {Skill.SkillType.Shield, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().IncreaseShieldCoolDown(a); return true; }},
         {Skill.SkillType.WallGrab, (float a) => {  GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>().ReduceWallGrabDuration(a); return true; }},
@@ -53,7 +53,7 @@ public class SkillsManager : MonoBehaviour
         try
         {
             Skill oldSkill = activeSkills[index];
-            skillDeactivationCallbacks[oldSkill.skillType](1.2f);
+            skillDeactivationCallbacks[oldSkill.skillType](1.5f);
             oldSkill.skillState = Skill.SkillState.Locked;
             oldSkill.GetComponent<SpriteRenderer>().enabled = false;
             
@@ -75,7 +75,7 @@ public class SkillsManager : MonoBehaviour
         newSkill.skillState = Skill.SkillState.Active;
         print("active skill state: " + activeSkills[index].skillState);
         try {
-            skillActivationCallbacks[newSkill.skillType](1.2f);
+            skillActivationCallbacks[newSkill.skillType](1.5f);
             newSkill.GetComponent<SpriteRenderer>().enabled = true;
             print("new skill name: " + newSkill.name);
         }

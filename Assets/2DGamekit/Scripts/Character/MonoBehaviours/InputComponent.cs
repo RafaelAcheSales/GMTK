@@ -155,7 +155,7 @@ namespace Gamekit2D
 
             public void Disable()
             {
-                m_Enabled = false;
+                m_Enabled = true;
             }
 
             public void GainControl()

@@ -67,7 +67,7 @@ namespace Gamekit2D
         public float hurtJumpSpeed = 5f;
         public float flickeringDuration = 0.1f;
 
-        public float meleeAttackDashSpeed = 5f;
+        public float meleeAttackDashSpeed = 0f;
         public bool dashWhileAirborne = false;
 
         public RandomAudioPlayer footstepAudioPlayer;
@@ -785,6 +785,12 @@ namespace Gamekit2D
         public void AddJump() {
             numberOfJumps++;
         }
+        public void AddMaxJumps() {
+            maxNumberOfJumps++;
+        }
+        public void RemoveMaxJumps() {
+            maxNumberOfJumps--;
+        }
         public bool CheckForJumpInput()
         {
             return PlayerInput.Instance.Jump.Down;
@@ -965,11 +971,13 @@ namespace Gamekit2D
 
         public bool CheckForMeleeAttackInput()
         {
+            if (!ManagerSingleton.Instance.isAnySkillActive(Skill.SkillType.Slash)) return false;
             return PlayerInput.Instance.MeleeAttack.Down;
         }
 
         public void MeleeAttack()
         {
+            print(ManagerSingleton.Instance.isAnySkillActive(Skill.SkillType.Slash));
             m_Animator.SetTrigger(m_HashMeleeAttackPara);
         }
 
@@ -983,6 +991,16 @@ namespace Gamekit2D
         public void DisableMeleeAttack()
         {
             meleeDamager.DisableDamage();
+        }
+        public void DestroyVine()
+        {
+            Debug.Log("destroy vines");
+            Collider2D[] result = Physics2D.OverlapBoxAll(transform.position, new Vector2(2, 2), 0,1 << LayerMask.NameToLayer("Destructable"));
+            foreach (Collider2D col in result)
+            {
+                Debug.Log(col.gameObject.name);
+                Destroy(col.gameObject);
+            }
         }
 
         public void JumpSound() {
