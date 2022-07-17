@@ -42,12 +42,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Water
+  - name: Sky
+    uniqueID: 3593703733
+    locked: 0
+  - name: Clouds
     uniqueID: 2116099231
     locked: 0
-  - name: Level
+  - name: Far Away
     uniqueID: 2344118779
     locked: 0
-  - name: Front
+  - name: Behind but Close
     uniqueID: 3405993979
+    locked: 0
+  - name: Player Level
+    uniqueID: 3121022035
     locked: 0
