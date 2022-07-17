@@ -41,7 +41,7 @@ namespace Gamekit2D
         protected bool m_CanDamage = true;
         protected bool m_hasDamaged = false;
         protected ContactFilter2D m_AttackContactFilter;
-        protected Collider2D[] m_AttackOverlapResults = new Collider2D[10];
+        public Collider2D[] m_AttackOverlapResults = new Collider2D[10];
         protected Transform m_DamagerTransform;
         protected Collider2D m_LastHit;
 

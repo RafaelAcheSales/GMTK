@@ -17,6 +17,8 @@ public class Skill : MonoBehaviour
         WallGrab,
         Glide,
 
+        Slash,
+
     }
     public enum SkillState {
         Locked,
@@ -39,13 +41,12 @@ public class Skill : MonoBehaviour
     public bool isActive { get { return skillState == SkillState.Active; } }
     
     private SpriteRenderer spriteRenderer;
-    // private Text skillDetailsText;
+    private Text skillDetailsText;
 
     private void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // skillDetailsText = GameObject.Find("SkillDetails").GetComponent<Text>();
-        UpdateColor();
+        skillDetailsText = GameObject.Find("SkillDetails").GetComponent<Text>();
 
     }
 
@@ -66,37 +67,22 @@ public class Skill : MonoBehaviour
         }
         return skills;
     }
-    public void UpdateColor(){
-        switch (skillState)
-        {
-            case SkillState.Locked:
-                spriteRenderer.color = SkillsManager.Instance.lockedColor;
-                break;
-            case SkillState.Unlocked:
-                spriteRenderer.color = SkillsManager.Instance.unlockedColor;
-                break;
-            case SkillState.Active:
-                spriteRenderer.color = SkillsManager.Instance.activeColor;
-                break;
-        }
-    }
 
     public void Unlock()
     {
         skillState = SkillState.Unlocked;
-        UpdateColor();
         Debug.Log("Unlocked " + skillType);
 
     }
 
     private void OnMouseEnter() {
-        // skillDetailsText.text = skillDetails;
-        // skillDetailsText.enabled = true;
+        skillDetailsText.text = skillDetails;
+        skillDetailsText.enabled = true;
     }
 
     private void OnMouseExit() {
-        // skillDetailsText.enabled = false;
-        // skillDetailsText.text = "";
+        skillDetailsText.enabled = false;
+        skillDetailsText.text = "";
     }
 
 
