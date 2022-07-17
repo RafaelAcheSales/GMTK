@@ -995,7 +995,6 @@ namespace Gamekit2D
             if (resetHealth)
                 damageable.SetHealth(damageable.startingHealth);
 
-            GameObject.FindObjectOfType<TimerSystem>().RemoveTime(timePenaltyForDying);
             //we reset the hurt trigger, as we don't want the player to go back to hurt animation once respawned
             m_Animator.ResetTrigger(m_HashHurtPara);
             if (m_FlickerCoroutine != null)
@@ -1015,7 +1014,6 @@ namespace Gamekit2D
                 UpdateFacing(m_StartingFacingLeft);
                 GameObjectTeleporter.Teleport(gameObject, m_StartingPosition);
             }
-            SkillsManager.Instance.transform.parent.position = transform.position + new Vector3(0, 2, 0);
             respawnAudioPlayer.PlayRandomSound();
 
         }
