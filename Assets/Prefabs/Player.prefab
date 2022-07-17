@@ -45,7 +45,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.053
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -289,8 +289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 6da8e2917a734d84a9c279a34d37ad23, type: 3}
-  - {fileID: 8300000, guid: 6da8e2917a734d84a9c279a34d37ad23, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   overrides: []
   randomizePitch: 1
   pitchRange: 0.2
@@ -756,6 +756,7 @@ GameObject:
   - component: {fileID: 4195128246482882}
   - component: {fileID: 4273543739127216}
   - component: {fileID: 4358048649049476}
+  - component: {fileID: 423266421}
   m_Layer: 13
   m_Name: Player
   m_TagString: Player
@@ -871,8 +872,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.09, y: 0.88}
-  m_Size: {x: 0.5, y: 1.67}
+  m_Offset: {x: 0.09, y: 0.96005964}
+  m_Size: {x: 0.5, y: 1.9979076}
   m_Direction: 0
 --- !u!50 &84578876555256158
 Rigidbody2D:
@@ -909,7 +910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundedLayerMask:
     serializedVersion: 2
-    m_Bits: 2147549192
+    m_Bits: 2147549248
   groundedRaycastDistance: 0.1
 --- !u!114 &4465982211872182
 MonoBehaviour:
@@ -995,7 +996,7 @@ MonoBehaviour:
   normalGravity: 32
   dashSpeed: 3
   numberOfJumps: 1
-  maxNumberOfJumps: 2
+  maxNumberOfJumps: 1
   dashAcceleration: 5
   dashReloadTime: 2
   wallGrabDuration: 0.2
@@ -1047,9 +1048,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 960138f0450083543ad1d17e1352019d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 1
-  invulnerableAfterDamage: 0
-  invulnerabilityDuration: 3
+  startingHealth: 3
+  invulnerableAfterDamage: 1
+  invulnerabilityDuration: 2
   disableOnDeath: 0
   centreOffset: {x: 0, y: 1}
   OnHealthSet:
@@ -1133,6 +1134,17 @@ MonoBehaviour:
   OnNonDamageableHit:
     m_PersistentCalls:
       m_Calls: []
+  m_AttackOverlapResults:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &4273543739127216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1282,6 +1294,32 @@ MonoBehaviour:
   dataSettings:
     dataTag: inventory
     persistenceType: 3
+--- !u!61 &423266421
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 115893904149248620}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.9775429, y: 1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 3.7534883, y: 2.8325582}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0822105, y: 2}
+  m_EdgeRadius: 0
 --- !u!1 &116001287741281494
 GameObject:
   m_ObjectHideFlags: 0
