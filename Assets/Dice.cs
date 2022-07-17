@@ -52,7 +52,7 @@ public class Dice : MonoBehaviour
             }
         }
         print("Result: " + result);
-        SkillsManager.Instance.ChangeSkill(KeyCodeToIndex(throwKey), result);
+        SkillsManager.Instance.ChangeSkill(KeyCodeToIndex(throwKey), result-1);
     }
     void resetDice() {
         rb.MovePosition(player.transform.position + offset);

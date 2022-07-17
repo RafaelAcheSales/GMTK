@@ -37,6 +37,9 @@ public class SkillsManager : Singleton<SkillsManager>
         foreach (Skill skill in GetComponentsInChildren<Skill>()) 
             skills.Add(new Tuple<Skill.SkillType, Skill>(skill.skillType, skill));
         audioSource = GetComponent<AudioSource>();
+        activeSkills.Add(null);
+        activeSkills.Add(null);
+        activeSkills.Add(null);
     }
     //returns if any skill of type is active
     public bool IsSkillActive(Skill.SkillType skillType) {
@@ -44,13 +47,28 @@ public class SkillsManager : Singleton<SkillsManager>
     }
 
     public void ChangeSkill(int index, int newSkillIndex) {
-        Skill oldSkill = activeSkills[index];
-        skillDeactivationCallbacks[oldSkill.skillType](2f);
-        oldSkill.skillState = Skill.SkillState.Locked;
+        try
+        {
+            Skill oldSkill = activeSkills[index];
+            skillDeactivationCallbacks[oldSkill.skillType](2f);
+            oldSkill.skillState = Skill.SkillState.Locked;
+            
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+        
         Skill newSkill = skills[newSkillIndex].Item2;
         activeSkills[index] = newSkill;
         newSkill.skillState = Skill.SkillState.Active;
-        skillActivationCallbacks[newSkill.skillType](2f);
+        try {
+            skillActivationCallbacks[newSkill.skillType](2f);
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e.Message);
+        }
     }
 
     

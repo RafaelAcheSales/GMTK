@@ -2705,7 +2705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &1511675482
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11008,7 +11008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillType: 1
-  skillState: 1
+  skillState: 2
   speedMultiplier: 1.2
   shieldIncreaseTime: 1
   skillDetails: Press SPACE again to double jump
@@ -11030,7 +11030,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2548175763543861945
 Transform:
   m_ObjectHideFlags: 0
@@ -11126,7 +11126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillType: 5
-  skillState: 1
+  skillState: 2
   speedMultiplier: 1.2
   shieldIncreaseTime: 1
   skillDetails: Grab onto walls
@@ -11148,7 +11148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2548175763919811037
 Transform:
   m_ObjectHideFlags: 0
@@ -11206,7 +11206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillType: 2
-  skillState: 1
+  skillState: 2
   speedMultiplier: 1.2
   shieldIncreaseTime: 1
   skillDetails: Press SHIFT to dash
@@ -11310,7 +11310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &2548175764497992976
 GameObject:
   m_ObjectHideFlags: 0
@@ -11329,7 +11329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2548175764497992977
 Transform:
   m_ObjectHideFlags: 0
@@ -11425,7 +11425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillType: 4
-  skillState: 1
+  skillState: 2
   speedMultiplier: 1.2
   shieldIncreaseTime: 1
   skillDetails: Press E to become  invulnerable
@@ -11606,7 +11606,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillType: 0
-  skillState: 1
+  skillState: 2
   speedMultiplier: 1.2
   shieldIncreaseTime: 1
   skillDetails: Increase movement speed
@@ -11968,7 +11968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &8136841279534135256
 SpriteRenderer:
   m_ObjectHideFlags: 0
