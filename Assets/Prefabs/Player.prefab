@@ -996,7 +996,7 @@ MonoBehaviour:
   normalGravity: 32
   dashSpeed: 3
   numberOfJumps: 1
-  maxNumberOfJumps: 1
+  maxNumberOfJumps: 4
   dashAcceleration: 5
   dashReloadTime: 2
   wallGrabDuration: 0.2
@@ -1795,9 +1795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abcd50fdc97f3e409820b29f208d704, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: 47176d193e263014bab4d0115bf7175a, type: 3}
-  - {fileID: 8300000, guid: add06e94065c2b24eadb50aaf665ab8c, type: 3}
+  clips: []
   overrides: []
   randomizePitch: 1
   pitchRange: 0.2
