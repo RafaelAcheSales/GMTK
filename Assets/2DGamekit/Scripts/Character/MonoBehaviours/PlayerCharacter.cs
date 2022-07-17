@@ -51,6 +51,7 @@ namespace Gamekit2D
         public float dashAcceleration = 2f;
         public float dashReloadTime = 1f;
         public float wallGrabDuration = 0.2f;
+        public float slashCooldown = 0.5f;
         public float maxSpeed = 10f;
         public float groundAcceleration = 100f;
         public float groundDeceleration = 100f;
@@ -223,7 +224,7 @@ namespace Gamekit2D
         }
         //Check if collided with wall while airborne
         private void OnCollisionEnter2D(Collision2D other) {
-            if (!SkillsManager.Instance.IsSkillActive(Skill.SkillType.WallGrab)) return;
+            if (!ManagerSingleton.Instance.isAnySkillActive(Skill.SkillType.WallGrab)) return;
             float rightAngle = Vector2.Angle(other.GetContact(0).normal, Vector2.right);
             float leftAngle = Vector2.Angle(other.GetContact(0).normal, Vector2.left);
             bool isWallOnRight = rightAngle > -45f && rightAngle < 45f;
@@ -278,7 +279,7 @@ namespace Gamekit2D
             shieldEffectTime += time;
         }
         public void UseShield() {
-            if (!SkillsManager.Instance.IsSkillActive(Skill.SkillType.Shield)) return;
+            if (!ManagerSingleton.Instance.isAnySkillActive(Skill.SkillType.Shield)) return;
             // Debug.Log(PlayerInput.Instance.Shield.Held +" " + m_CanUseShield + " " + m_CanUseShield);
             if (PlayerInput.Instance.Shield.Down && m_CanUseShield) {
                 Debug.Log("Use shield");
@@ -452,7 +453,7 @@ namespace Gamekit2D
         }
 
         public bool Dash() {
-            if(!SkillsManager.Instance.IsSkillActive(Skill.SkillType.Dash)) return false;
+            if(!ManagerSingleton.Instance.isAnySkillActive(Skill.SkillType.Dash)) return false;
             if (PlayerInput.Instance.Dash.Down && m_canDash) {
                 m_MoveVector.x = m_MoveVector.x * dashSpeed;
                 m_Animator.SetTrigger(m_HashDashPara);
@@ -530,11 +531,13 @@ namespace Gamekit2D
         public void IncreaseMaxSpeed(float multiplier)
         {
             maxSpeed = maxSpeed * multiplier;
+            print("increase max speed to " + maxSpeed);
         }
 
         public void ReduceMaxSpeed(float multiplier)
         {
             maxSpeed = maxSpeed / multiplier;
+            print("reduced max speed to " + maxSpeed);
         }
 
         public void ReduceDashCooldown(float a)
@@ -564,6 +567,16 @@ namespace Gamekit2D
         public void ReduceWallGrabDuration(float a)
         {
             wallGrabDuration = wallGrabDuration / a;
+        }
+
+        public void DecreaseSlashCooldown(float a)
+        {
+            slashCooldown = slashCooldown / a;
+        }
+
+        public void IncreaseSlashCooldown(float a)
+        {
+            slashCooldown = slashCooldown * a;
         }
 
         public Vector2 GetMoveVector()

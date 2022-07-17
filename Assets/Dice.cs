@@ -51,8 +51,9 @@ public class Dice : MonoBehaviour
                 result = int.Parse(child.name);
             }
         }
-        print("Result: " + result);
-        SkillsManager.Instance.ChangeSkill(KeyCodeToIndex(throwKey), result-1);
+        print("Result: " + (result-1));
+        print("keycode to index: " + KeyCodeToIndex(throwKey));
+        ManagerSingleton.Instance.skillsManagers[KeyCodeToIndex(throwKey)].ChangeSkill(KeyCodeToIndex(throwKey), result-1);
     }
     void resetDice() {
         rb.MovePosition(player.transform.position + offset);

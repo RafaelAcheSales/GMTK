@@ -26,18 +26,18 @@ namespace Gamekit2D
                         m_MonoBehaviour.SetHorizontalMovement(movement * m_MonoBehaviour.wallJumpMultiplier);
                         // m_MonoBehaviour.RemoveJump();
                     } else {
-                        if (SkillsManager.Instance.IsSkillActive(Skill.SkillType.AditionalJump))  {
+                        if (ManagerSingleton.Instance.isAnySkillActive(Skill.SkillType.AditionalJump))  {
                             
                             m_MonoBehaviour.SetVerticalMovement(m_MonoBehaviour.jumpSpeed);
                             m_MonoBehaviour.RemoveJump(); 
 
-                        } else if (SkillsManager.Instance.IsSkillActive(Skill.SkillType.AditionalJump)){
+                        } else if (ManagerSingleton.Instance.isAnySkillActive(Skill.SkillType.AditionalJump)){
                             m_MonoBehaviour.StartGliding();
                         }
 
                     }
 
-                } else if (SkillsManager.Instance.IsSkillActive(Skill.SkillType.Glide)) {
+                } else if (ManagerSingleton.Instance.isAnySkillActive(Skill.SkillType.Glide)) {
                     m_MonoBehaviour.StartGliding();
                 }
             } 

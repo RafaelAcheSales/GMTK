@@ -12,8 +12,5 @@ public class SkillPointsTracker : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        skillPointsText.text = "Skill Points: " + SkillsManager.Instance.skillPoints;
-    }
+
 }
